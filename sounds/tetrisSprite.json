@@ -1,0 +1,30 @@
+{
+  "urls": [
+    "tetrisSprite.ogg",
+    "tetrisSprite.m4a",
+    "tetrisSprite.mp3",
+    "tetrisSprite.ac3"
+  ],
+  "sprite": {
+    "fullLine": [
+      0,
+      2400
+    ],
+    "gameOver": [
+      3500,
+      6636.167800453513
+    ],
+    "mainTheme": [
+      11000,
+      167524.33106575964
+    ],
+    "newLevel": [
+      179500,
+      904.104308390032
+    ],
+    "rotate": [
+      181000,
+      57.9365079365175
+    ]
+  }
+}
