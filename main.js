@@ -19,6 +19,14 @@ function trackPlayEvent() {
         }
     }
 }
+
+function trackLevelAdvance(levelNumber) {
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'TETRIS_ADV_LEV', {
+            level: levelNumber
+        });
+    }
+}
 // #endregion
 
 // #region touch screen event listners
@@ -919,6 +927,7 @@ function checkCompleteRows() {
             window.playIfIdle("fullLine");
             if (lines % 10 == 0) {
                 level += 1;
+                trackLevelAdvance(level);
                 window.playIfIdle("newLevel");
                 if (dropDelay > 0.2) {
                     dropDelay -= 0.1;

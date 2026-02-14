@@ -2,7 +2,7 @@
 // Change the cache name when updating to cause cache refresh on progressive web apps
 
 
-const CACHE_NAME = 'tetris-cache-Aug-15-2025-09:38';
+const CACHE_NAME = 'tetris-cache-Feb-14-2026-20:06';
 const FILES_TO_CACHE = [
   '/tetris/',
   '/tetris/index.html',
