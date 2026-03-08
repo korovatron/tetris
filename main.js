@@ -6,29 +6,6 @@ window.addEventListener('orientationchange', resizeCanvas);
 const pressedKeys = new Set();
 const isKeyDown = (key) => pressedKeys.has(key);
 
-// #region Google Analytics gameplay tracking with throttle
-let lastPlayEventTime = 0;
-const PLAY_EVENT_THROTTLE = 30000; // 30 seconds in milliseconds
-
-function trackPlayEvent() {
-    const currentTime = Date.now();
-    if (currentTime - lastPlayEventTime >= PLAY_EVENT_THROTTLE) {
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'TETRIS-play');
-            lastPlayEventTime = currentTime;
-        }
-    }
-}
-
-function trackLevelAdvance(levelNumber) {
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'TETRIS_ADV_LEV', {
-            level: levelNumber
-        });
-    }
-}
-// #endregion
-
 // #region touch screen event listners
 let mute = false;
 let lastX = null;
@@ -65,17 +42,14 @@ document.addEventListener('touchmove', (e) => {
     if (accumulatedX > MOVE_THRESHOLD) {
         movePieceRight();
         accumulatedX = 0;
-        trackPlayEvent();
     } else if (accumulatedX < -MOVE_THRESHOLD) {
         movePieceLeft();
         accumulatedX = 0;
-        trackPlayEvent();
     }
 
     if (accumulatedY > MOVE_THRESHOLD) {
         dropPieceDown();
         accumulatedY = 0;
-        trackPlayEvent();
     }
 
     lastX = currentX;
@@ -290,7 +264,6 @@ document.addEventListener('keydown', (e) => {
         case "ArrowUp":
         case "ArrowDown":
             e.preventDefault();
-            trackPlayEvent();
             break;
     }
 }
@@ -927,7 +900,6 @@ function checkCompleteRows() {
             window.playIfIdle("fullLine");
             if (lines % 10 == 0) {
                 level += 1;
-                trackLevelAdvance(level);
                 window.playIfIdle("newLevel");
                 if (dropDelay > 0.2) {
                     dropDelay -= 0.1;
